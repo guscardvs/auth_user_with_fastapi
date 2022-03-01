@@ -1,31 +1,33 @@
 [project]
 name = ""
-version = "0.0.1"
+version = {from = "src/__init__.py"}
 description = ""
-authors = [
-    {name = "Gustavo Correa", email = "self.gustavocorrea@gmail.com"},
-]
+authors = [{ name = "Gustavo Correa", email = "self.gustavocorrea@gmail.com" }]
 dependencies = [
     "fastapi~=0.74",
     "uvicorn~=0.17",
-    "pydantic~=1.9",
+    "pydantic[email]~=1.9",
+    "orjson~=3.6",
+    "sqlalchemy[asyncpg]~=1.4",
+    "asyncpg~=0.25",
+    "tzdata~=2021.5",
+    "alembic~=1.7",
+    "psycopg2~=2.9",
+    "passlib[scrypt]~=1.7",
+    "argon2-cffi~=21.3",
 ]
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 [project.urls]
 Homepage = ""
 
 [project.optional-dependencies]
+
 [tool]
 [tool.pdm]
 [tool.pdm.dev-dependencies]
-test = [
-    "pytest~=7.0",
-    "pytest-cov~=3.0",
-    "coverage~=6.3",
-    "pytest-sugar~=0.9",
-]
+test = ["pytest~=7.0", "pytest-cov~=3.0", "coverage~=6.3", "pytest-sugar~=0.9"]
 lint = [
     "blue~=0.8",
     "autoflake~=1.4",
@@ -33,6 +35,18 @@ lint = [
     "bandit~=1.7",
     "pylint~=2.12",
 ]
+stubs = [
+    "sqlalchemy2-stubs<1,>=0.0.2a20",
+]
+dev = [
+    "requests~=2.27",
+    "aiosqlite~=0.17",
+]
+
+[tool.pdm.scripts]
+format = { shell = 'make format' }
+test = { cmd = "pytest tests", env_file = ".env-test" }
+dev = { cmd = "uvicorn src.main:app --host 127.0.0.1 --port 8000 --reload", env_file = ".env-dev" }
 
 [build-system]
 requires = ["pdm-pep517"]

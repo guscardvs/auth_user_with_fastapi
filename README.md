@@ -1,4 +1,5 @@
 # auth_user_with_fastapi
+
 Authentication and User with fastapi
 
 ## Features
@@ -18,5 +19,3 @@ Authentication and User with fastapi
     - email
     - password
     - birth_date
-    - phone
-
